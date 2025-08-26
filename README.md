@@ -68,8 +68,8 @@ module "sqs_dlq_alarms" {
   queue_depth_threshold   = 50    # Alert if more than 50 messages queued
 
   # Optional alarms
-  enable_processing_failure_alarm   = true
-  enable_high_message_rate_alarm    = true
+  create_processing_failure_alarm   = true
+  create_high_message_rate_alarm    = true
   processing_failure_threshold      = 5    # Minimum 5 messages processed per period
   high_message_rate_threshold       = 500  # Alert on more than 500 messages/period
 
@@ -91,7 +91,7 @@ module "sqs_alarms_no_dlq" {
   dlq_queue_name = null  # No DLQ
 
   # Only main queue alarms will be created
-  enable_dlq_alarm = false
+  create_dlq_alarm = false
 
   alarm_actions = [aws_sns_topic.alerts.arn]
 
@@ -226,23 +226,23 @@ module "sqs_dlq_alarms" {
 | alarm_actions | List of ARNs to notify when alarm transitions to ALARM state | `list(string)` | `[]` | no |
 | ok_actions | List of ARNs to notify when alarm transitions to OK state | `list(string)` | `[]` | no |
 | tags | A map of tags to assign to the CloudWatch alarms | `map(string)` | `{}` | no |
-| enable_dlq_alarm | Enable alarm for messages sent to dead letter queue | `bool` | `true` | no |
+| create_dlq_alarm | Enable alarm for messages sent to dead letter queue | `bool` | `true` | no |
 | dlq_threshold | Threshold for DLQ messages received alarm | `number` | `0` | no |
 | dlq_period | Period for DLQ messages received alarm in seconds | `number` | `300` | no |
 | dlq_evaluation_periods | Number of evaluation periods for DLQ messages received alarm | `number` | `1` | no |
-| enable_message_age_alarm | Enable alarm for age of oldest message in main queue | `bool` | `true` | no |
+| create_message_age_alarm | Enable alarm for age of oldest message in main queue | `bool` | `true` | no |
 | message_age_threshold | Threshold for message age alarm in seconds | `number` | `900` | no |
 | message_age_period | Period for message age alarm in seconds | `number` | `300` | no |
 | message_age_evaluation_periods | Number of evaluation periods for message age alarm | `number` | `2` | no |
-| enable_queue_depth_alarm | Enable alarm for main queue depth | `bool` | `true` | no |
+| create_queue_depth_alarm | Enable alarm for main queue depth | `bool` | `true` | no |
 | queue_depth_threshold | Threshold for main queue depth alarm | `number` | `100` | no |
 | queue_depth_period | Period for queue depth alarm in seconds | `number` | `300` | no |
 | queue_depth_evaluation_periods | Number of evaluation periods for queue depth alarm | `number` | `3` | no |
-| enable_processing_failure_alarm | Enable alarm for low message processing rate | `bool` | `false` | no |
+| create_processing_failure_alarm | Enable alarm for low message processing rate | `bool` | `false` | no |
 | processing_failure_threshold | Minimum threshold for message deletion rate | `number` | `1` | no |
 | processing_failure_period | Period for processing failure alarm in seconds | `number` | `600` | no |
 | processing_failure_evaluation_periods | Number of evaluation periods for processing failure alarm | `number` | `2` | no |
-| enable_high_message_rate_alarm | Enable alarm for high message reception rate | `bool` | `false` | no |
+| create_high_message_rate_alarm | Enable alarm for high message reception rate | `bool` | `false` | no |
 | high_message_rate_threshold | Threshold for high message rate alarm | `number` | `1000` | no |
 | high_message_rate_period | Period for high message rate alarm in seconds | `number` | `300` | no |
 | high_message_rate_evaluation_periods | Number of evaluation periods for high message rate alarm | `number` | `1` | no |
