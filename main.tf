@@ -13,7 +13,7 @@ locals {
 
 # Main Queue Age of Oldest Message
 resource "aws_cloudwatch_metric_alarm" "queue_message_age" {
-  count = var.enable_message_age_alarm ? 1 : 0
+  count = var.create_message_age_alarm ? 1 : 0
 
   alarm_name          = "${var.queue_name}-message-age"
   alarm_description   = "Messages in queue are older than ${var.message_age_threshold} seconds"
@@ -41,7 +41,7 @@ resource "aws_cloudwatch_metric_alarm" "queue_message_age" {
 # Main Queue Depth
 #
 resource "aws_cloudwatch_metric_alarm" "queue_depth" {
-  count = var.enable_queue_depth_alarm ? 1 : 0
+  count = var.create_queue_depth_alarm ? 1 : 0
 
   alarm_name          = "${var.queue_name}-depth"
   alarm_description   = "Queue has too many messages (depth > ${var.queue_depth_threshold})"
@@ -69,7 +69,7 @@ resource "aws_cloudwatch_metric_alarm" "queue_depth" {
 # Message Processing Failures
 #
 resource "aws_cloudwatch_metric_alarm" "message_processing_failure" {
-  count = var.enable_processing_failure_alarm ? 1 : 0
+  count = var.create_processing_failure_alarm ? 1 : 0
 
   alarm_name          = "${var.queue_name}-processing-failure"
   alarm_description   = "Queue message processing rate is too low"
@@ -97,7 +97,7 @@ resource "aws_cloudwatch_metric_alarm" "message_processing_failure" {
 # High Message Receive Rate (potential flood)
 #
 resource "aws_cloudwatch_metric_alarm" "high_message_rate" {
-  count = var.enable_high_message_rate_alarm ? 1 : 0
+  count = var.create_high_message_rate_alarm ? 1 : 0
 
   alarm_name          = "${var.queue_name}-high-message-rate"
   alarm_description   = "Queue is receiving too many messages (rate > ${var.high_message_rate_threshold} per ${var.high_message_rate_period}s)"
@@ -125,7 +125,7 @@ resource "aws_cloudwatch_metric_alarm" "high_message_rate" {
 # CloudWatch Alarm: Messages Sent to Dead Letter Queue
 #
 resource "aws_cloudwatch_metric_alarm" "dlq_messages_received" {
-  count = var.enable_dlq_alarm && var.dlq_queue_name != null ? 1 : 0
+  count = var.create_dlq_alarm && var.dlq_queue_name != null ? 1 : 0
 
   alarm_name          = "${var.queue_name}-dlq-messages-received"
   alarm_description   = "Messages are being sent to DLQ"

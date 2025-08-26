@@ -25,7 +25,7 @@ variable "sns_topic_arn" {
 #
 # Message Age Alarm Variables
 #
-variable "enable_message_age_alarm" {
+variable "create_message_age_alarm" {
   description = "Enable alarm for age of oldest message in main queue"
   type        = bool
   default     = true
@@ -52,7 +52,7 @@ variable "message_age_evaluation_periods" {
 #
 # Queue Depth Alarm Variables
 #
-variable "enable_queue_depth_alarm" {
+variable "create_queue_depth_alarm" {
   description = "Enable alarm for main queue depth"
   type        = bool
   default     = true
@@ -79,7 +79,7 @@ variable "queue_depth_evaluation_periods" {
 #
 # Processing Failure Alarm Variables
 #
-variable "enable_processing_failure_alarm" {
+variable "create_processing_failure_alarm" {
   description = "Enable alarm for low message processing rate"
   type        = bool
   default     = false
@@ -106,7 +106,7 @@ variable "processing_failure_evaluation_periods" {
 #
 # High Message Rate Alarm Variables
 #
-variable "enable_high_message_rate_alarm" {
+variable "create_high_message_rate_alarm" {
   description = "Enable alarm for high message reception rate"
   type        = bool
   default     = false
@@ -133,7 +133,7 @@ variable "high_message_rate_evaluation_periods" {
 #
 # DLQ Message Reception Alarm Variables
 #
-variable "enable_dlq_alarm" {
+variable "create_dlq_alarm" {
   description = "Enable alarm for messages sent to dead letter queue"
   type        = bool
   default     = true
